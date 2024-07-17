@@ -1,6 +1,7 @@
 const express = require('express')
 var cors = require('cors')
 
+
 require('dotenv').config();
 
 const dbConfig = require('./config/dbConfig')
@@ -34,6 +35,8 @@ const PORT = process.env.PORT || 8081
 app.listen(PORT , ()=>{
     console.log("server running")
 })
+
+
 
 
 

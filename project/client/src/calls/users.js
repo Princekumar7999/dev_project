@@ -9,7 +9,7 @@ export const RegisterUser = async (value) => {
     }catch(error){
         console.log(error);
     }
-}
+};
 
 
 // login user
@@ -21,7 +21,7 @@ export const LoginUser = async (value) =>{
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 // get current user from the frontend
 
@@ -32,7 +32,7 @@ export const GetCurrentUser = async () =>{
        } catch (error) {
           console.log(error)
        }
-}
+};
 
 
 /// Forget and Reset Password
@@ -44,7 +44,7 @@ export const ForgetPassword = async (value) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 export const ResetPassword = async (value) => {
     try {
@@ -53,7 +53,7 @@ export const ResetPassword = async (value) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 
 

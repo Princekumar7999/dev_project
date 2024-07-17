@@ -10,7 +10,7 @@ const router = express.Router();
 //Function for otp generation
 
 const otpGenerator = function () {
-  return Math.floor((Math.random() * 10000) + 90000);
+  return Math.floor(Math.random() * 10000 + 90000);
 }
 
 router.post("/register", async (req, res) => {
@@ -85,7 +85,7 @@ router.get("/get-current-user", authMiddleware, async (req, res) => {
 
   res.send({
     success: true,
-    message: 'You are authorized to go to the protected route!',
+    message: "You are authorized to go to the protected route!",
     data: user
    })
 });
@@ -134,7 +134,7 @@ router.patch("/forgetpassword", async function (req, res) {
       , user.email,
       {
         name: user.name,
-        otp: otp
+        otp: otp,
       });
   } catch (err) {
     res.status(500).json({
@@ -143,7 +143,7 @@ router.patch("/forgetpassword", async function (req, res) {
     })
   }
   //  email
-})
+});
 
 
 router.patch("/resetpassword", async function (req, res) {
@@ -166,14 +166,14 @@ router.patch("/resetpassword", async function (req, res) {
       return res.status(404).json({
         status: "failure",
         message: "user not found"
-      })
+      });
     }
     // if otp is expired
     if (Date.now() > user.otpExpiry) {
       return res.status(401).json({
         status: "failure",
         message: "otp expired"
-      })
+      });
     }
     const salt = await bcrypt.genSalt(10);
     const hashPwd = bcrypt.hashSync(req.body.password, salt);
@@ -184,16 +184,16 @@ router.patch("/resetpassword", async function (req, res) {
     await user.save();
     res.status(200).json({
       status: "success",
-      message: "password reset successfully"
+      message: "password reset successfully",
     })
   } catch (err) {
     res.status(500).json({
       message: err.message,
-      status: "failure"
-    })
+      status: "failure",
+    });
   }
 
 
-})
+});
 
 module.exports = router;

@@ -1,4 +1,5 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 const stripe = require("stripe")(
   "sk_test_51JKPQWSJULHQ0FL7LbqLKOaIcjurlUcdP2hJQkXZw3txlhh0hFrEEEOTwdVxf6sWKqLIrerKpV5EfGvmvntYu7Mt00vJq4YQKL"
 );
@@ -10,8 +11,10 @@ const EmailHelper = require("../utils/emailSender");
 const endpointSecret = "whsec_774b9109545b45e18af845534afa4e7e0d144a1a57db46482ca7886c10cd5a5a";
 
  // Webhook endpoint 
-router.post('/webhook', express.raw({ type: 'application/json' }), (request, response) => {
-  console.log('Webhook Called')
+router.post("/webhook", 
+express.raw({ type: 'application/json' }), 
+(request, response) => {
+  console.log('Webhook Called');
   const sig = request.headers['stripe-signature'];
   let event;
 
@@ -24,7 +27,7 @@ try {
 
   // Handle the event
   switch (event.type) {
-    case 'payment_intent.succeeded':
+    case "payment_intent.succeeded":
       const paymentIntent = event.data.object;
       handlePaymentIntentSucceeded(paymentIntent);
       break;
@@ -98,7 +101,8 @@ router.post("/book-show", async (req, res) => {
       bookedSeats: updatedBookedSeats,
     });
 
-    const populatedBooking = await Booking.findById(newBooking._id).populate("user")
+    const populatedBooking = await Booking.findById(newBooking._id)
+    .populate("user")
     .populate("show")
     .populate({
       path: "show",
